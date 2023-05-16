@@ -7,12 +7,16 @@
     "build": "tsx",
     "start": "node dist/index.js",
     "dev": "tsx watch src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --ext .ts && tsc --noEmit",
+    "lint:fix": "eslint src --ext .ts --fix && tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^20.1.5",
     "tsx": "^3.12.7",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@rocketseat/eslint-config": "^1.2.0",
+    "eslint": "^8.39.0"
   },
   "dependencies": {
     "fastify": "^4.17.0"

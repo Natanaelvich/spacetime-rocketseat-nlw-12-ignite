@@ -3,3 +3,6 @@
 
 # env
 .env
+
+#db
+dev.db

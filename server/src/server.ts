@@ -1,12 +1,11 @@
 import fastify from 'fastify'
+import { memoriesRoutes } from './routes/memories'
 
 const server = fastify({
   logger: true,
 })
 
-server.get('/', async (request, reply) => {
-  return { hello: 'world' }
-})
+server.register(memoriesRoutes)
 
 server.listen({ port: 3333 }, (err, address) => {
   if (err) {

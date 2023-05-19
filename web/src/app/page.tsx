@@ -19,7 +19,6 @@ interface Memory {
 export default async function Home() {
   const isAuthenticated = cookies().has('token')
 
-  console.log(isAuthenticated)
   if (!isAuthenticated) {
     return <EmptyMemories />
   }
@@ -33,8 +32,6 @@ export default async function Home() {
   })
 
   const memories: Memory[] = response.data
-
-  console.log(memories)
 
   if (memories.length === 0) {
     return <EmptyMemories />

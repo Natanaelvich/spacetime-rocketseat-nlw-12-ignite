@@ -19,7 +19,7 @@ server.register(jwt, {
 server.register(authRoutes)
 server.register(memoriesRoutes)
 
-server.listen({ port: 3333 }, (err, address) => {
+server.listen({ port: 3333, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)

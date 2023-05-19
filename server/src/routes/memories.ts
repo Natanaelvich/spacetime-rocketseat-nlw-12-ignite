@@ -1,16 +1,28 @@
 import { FastifyInstance } from 'fastify'
-import { prisma } from '../lib/prisma'
 import { z } from 'zod'
+import { prisma } from '../lib/prisma'
 
 export async function memoriesRoutes(app: FastifyInstance) {
+  app.addHook('preHandler', async (request) => {
+    await request.jwtVerify()
+  })
+
   app.get('/memories', async (request) => {
-    const memories = await prisma.memory.findMany()
+    const memories = await prisma.memory.findMany({
+      where: {
+        userId: request.user.sub,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    })
 
     return memories.map((memory) => {
       return {
         id: memory.id,
         coverUrl: memory.coverUrl,
         excerpt: memory.content.substring(0, 115).concat('...'),
+        createdAt: memory.createdAt,
       }
     })
   })
@@ -27,6 +39,10 @@ export async function memoriesRoutes(app: FastifyInstance) {
         id,
       },
     })
+
+    if (!memory.isPublic && memory.userId !== request.user.sub) {
+      return reply.status(401).send()
+    }
 
     return memory
   })
@@ -45,7 +61,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
         content,
         coverUrl,
         isPublic,
-        userId: 'adswd-123123-123123-123123',
+        userId: request.user.sub,
       },
     })
 

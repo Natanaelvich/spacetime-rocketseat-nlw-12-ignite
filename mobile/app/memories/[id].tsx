@@ -30,7 +30,6 @@ const MemoryDetails = () => {
   const [memory, setMemory] = useState<Memory | undefined>()
   const [loading, setLoading] = useState(true)
 
-  console.log(id, memory)
   useEffect(() => {
     async function loadMemory() {
       try {

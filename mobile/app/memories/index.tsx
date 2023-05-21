@@ -10,15 +10,15 @@ import {
 import Icon from '@expo/vector-icons/Feather'
 import * as SecureStore from 'expo-secure-store'
 
-import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
+import NLWLogo from '../../src/assets/nlw-spacetime-logo.svg'
 import { Link, useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
-import { api } from '../src/lib/api'
-import replaceLocalhostImageUrlToBaseUrl from '../src/utils/replaceLocalhostImageUrlToBaseUrl'
-import { LoadMemories } from '../src/components/LoadMemories'
+import { LoadMemories } from '../../src/components/LoadMemories'
+import { api } from '../../src/lib/api'
+import replaceLocalhostImageUrlToBaseUrl from '../../src/utils/replaceLocalhostImageUrlToBaseUrl'
 
 dayjs.locale(ptBR)
 
@@ -131,7 +131,7 @@ export default function NewMemory() {
                   <Text className="font-body text-base leading-relaxed text-gray-100">
                     {memory.excerpt}
                   </Text>
-                  <Link href="/memories/id" asChild>
+                  <Link href={`/memories/${memory.id}`} asChild>
                     <TouchableOpacity className="flex-row items-center gap-2">
                       <Text className="font-body text-sm text-gray-200">
                         Ler mais
